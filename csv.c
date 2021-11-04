@@ -12,23 +12,25 @@ void read_image(FILE* file, int numero, int num_imagen) {
         fread(&pixel, sizeof(char), 1, file);
         fwrite(&pixel, sizeof(char), 1, img_bin);
     }
-    fclose(img_bin);
     free(name);
 }
 
 int main() {
     for (int num = 0; num < 10; num++) {
         printf("%d%%\n", num*10);
-        char* name = malloc(sizeof(char)*15);
+        char* name_src = malloc(sizeof(char)*25);
         
-        sprintf(name, "binary_data/data%d.bin", num);
+        sprintf(name_src, "binary_data/data%d.bin", num);
 
-        FILE* file  = fopen(name, "rb");
+        char* name_dst = malloc(sizeof(char)*25);
+        sprintf(name_dst, "binary_data/data%d.bin", num);
 
+        FILE* file_src  = fopen(name_src, "rb");
+        FILE* file_dst = fopen();
         for (int i = 0; i < 1000; i++)
-            read_image(file, num, i);
+            read_image(file_src, num, i);
         
-        fclose(file);
+        fclose(file_src);
         free(name);
     }
 }
