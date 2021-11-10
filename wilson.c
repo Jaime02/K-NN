@@ -5,26 +5,32 @@
 
 #include "list.h"
 
+int distancia_euclideana(Imagen img1, Imagen img2) {
+    int distancia = 0;
+
+    for (int i = 0; i < 28 * 28; i++) {
+        distancia += pow((img1[i] - img2[i]), 2);
+    }
+    return (int)sqrt(distancia);
+}
+
 int main() {
-    Imagen dataset[10][1000];
-
-    // Create a list of images with the good images
-    Lista lista;
-
-    crear_lista(&lista);
+    Lista dataset_lista;
+    crear_lista(&dataset_lista);
 
     char* nombre_datos_binario = (char*)malloc(25);
+    Imagen aux;
+    
     printf("Loading dataset... \n");
-    for (int i = 0; i < 10; i++) {
+    for (int numero = 0; numero < 10; numero++) {
         sprintf(nombre_datos_binario, "binary_data/data%d.bin", i);
 
         FILE* datos_binario = fopen(nombre_datos_binario, "rb");
 
         for (int j = 0; j < 1000; j++) {
-            for (int k = 0; k < 28; k++) {
-                for (int l = 0; l < 28; l++) {
-                    fread(&dataset[i][j][k][l], sizeof(char), 1, datos_binario);
-                }
+            for (int k = 0; k < 28 * 28; k++) {
+                fread(&(aux[j][k]), sizeof(char), 1, datos_binario);
+                encolar(dataset_lista, aux, numero);
             }
         }
         fclose(datos_binario);
@@ -32,34 +38,25 @@ int main() {
     printf("Loaded dataset \n");
 
     float distancia = 0;
-    for (int actual = 0; actual < 10; actual++) {
-        for (int j = 0; j < 1000; j++) {
-            for (int k = 0; k < 1000; k++) {
-                for (int otro = 0; otro < 10; otro++) {
-                    if (j != k && otro != actual) {
-                        distancia = 0;
+    
 
-                        // It calculates the euclidean distance between the two
-                        // images which are stored as a array of arrays of chars
-                        for (int row = 0; row < 28; row++) {
-                            for (int col = 0; col < 28; col++) {
-                                float res = ((float)dataset[actual][j][row][col]) - ((float)dataset[otro][k][row][col]);
-                                printf(" %f", res);
-                                distancia += pow(res, 2);
-                            }
-                            sleep(1);
-                        }
+    Celda* celda_actual = dataset_lista->ini;
+    for (int i = 0; i < dataset_lista->tamanio; i++) {
 
-                        distancia = sqrt(distancia);
-                        printf("%f\n", distancia);
-                        // If the distance is lower than the threshold, the
-                        // image is added to the list of the valid images
-                        sleep(1);
-                    }
-                }
+        for (int j = 0; j < dataset_lista->tamanio; j++) {
+            if (i == j) {
+                continue;
             }
-            // printf("Acabo con el numero %d \n", j);
+            // array 2d clase distancia 
+            distancia = distancia_euclideana(celda_actual->imagen, celda_actual->imagen);
+            printf("%d \n", distancia);
         }
+
+
+        celda_actual = celda_actual->sig;
     }
+
+
+
     free(nombre_datos_binario);
 }
