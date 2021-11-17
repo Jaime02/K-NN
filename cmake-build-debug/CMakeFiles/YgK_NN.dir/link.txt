@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\YgK_NN.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\YgK_NN.dir/objects.a @CMakeFiles\YgK_NN.dir\objects1.rsp
+C:\MinGW\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\YgK_NN.dir/objects.a -Wl,--no-whole-archive  -o YgK_NN.exe -Wl,--out-implib,libYgK_NN.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\YgK_NN.dir\linklibs.rsp

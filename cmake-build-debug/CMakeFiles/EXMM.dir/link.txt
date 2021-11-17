@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\EXMM.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\EXMM.dir/objects.a @CMakeFiles\EXMM.dir\objects1.rsp
+C:\MinGW\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\EXMM.dir/objects.a -Wl,--no-whole-archive  -o EXMM.exe -Wl,--out-implib,libEXMM.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\EXMM.dir\linklibs.rsp
