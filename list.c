@@ -1,5 +1,5 @@
 #include "list.h"
-
+#include <stdio.h>
 #include <stdlib.h>
 
 void crear_lista(Lista *l) {
@@ -26,6 +26,7 @@ void encolar(Lista *l, Imagen image, int numero) {
         nuevo->ant = NULL;
         l->ini = nuevo;
     }
+    (l->tamanio)++;
 }
 
 void desencolar(Lista *l) {
