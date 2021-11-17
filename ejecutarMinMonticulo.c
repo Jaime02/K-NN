@@ -9,7 +9,7 @@ int main() {
     // printf("Introduce el numero maximo de elementos: ");
     // scanf("%d", &numEl);
     numEl = 10;
-    nuevoMinMonticulo(&mon, numEl);
+    nuevoMaxMonticulo(&mon, numEl);
     do {
         printf("\n--------MENU-------- \n");
         printf("1 - Insertar un elemento en el monticulo\n");
@@ -23,7 +23,7 @@ int main() {
             case 1:
                 printf("Introduce distancia y tipo: ");
                 scanf("%lf %d", &elem.distancia, &elem.tipo_numero);
-                insertarMinMonticulo(&mon, elem);
+                insertarMaxMonticulo(&mon, elem);
                 break;
             case 2:
                 printf("Introduce el entero: ");

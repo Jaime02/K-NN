@@ -14,7 +14,7 @@ typedef struct {
     int numEl;
 } tipoMaxMonticulo;
 
-void nuevoMaxMonticulo(tipoMaxMonticulo *, tipoElementoMaxMonticulo);
+void nuevoMaxMonticulo(tipoMaxMonticulo *, int);
 
 void insertarMaxMonticulo(tipoMaxMonticulo *, tipoElementoMaxMonticulo);
 

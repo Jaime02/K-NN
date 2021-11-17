@@ -16,6 +16,13 @@ int hijoIzq(int i) { return (i * 2 + 1); }
 
 int hijoDer(int i) { return (i * 2 + 2); }
 
+int max(int x, int y){
+    if(x < y)
+        return(y);
+    else
+        return(x);
+}
+
 void hundir(tipoElementoMaxMonticulo *a, int i) {
     while (a[padre(i)].distancia < a[i].distancia) {
         intercambiar(a, i, padre(i));

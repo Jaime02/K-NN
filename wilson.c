@@ -23,14 +23,14 @@ int main() {
     
     printf("Loading dataset... \n");
     for (int numero = 0; numero < 10; numero++) {
-        sprintf(nombre_datos_binario, "binary_data/data%d.bin", i);
+        sprintf(nombre_datos_binario, "binary_data/data%d.bin", numero);
 
         FILE* datos_binario = fopen(nombre_datos_binario, "rb");
 
         for (int j = 0; j < 1000; j++) {
             for (int k = 0; k < 28 * 28; k++) {
                 fread(&(img[k]), sizeof(char), 1, datos_binario);
-                encolar(dataset_lista, img, numero);
+                encolar(&dataset_lista, img, numero);
             }
         }
         fclose(datos_binario);
@@ -39,7 +39,7 @@ int main() {
 
     float distancia = 0;
 
-    Celda* celda_actual = dataset_lista->ini;
+    Celda* celda_actual = dataset_lista.ini;
     Celda* celda_comparar = celda_actual->sig;
 
     while (celda_actual != NULL) {

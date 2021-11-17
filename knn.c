@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "list.h"
+#include "maxMonticulo.h"
+
+#define N 5 //La N del KNN
 
 double distancia_euclideana(Imagen img1, Imagen img2) {
     // Entre 0 y 7140
@@ -16,6 +19,8 @@ double distancia_euclideana(Imagen img1, Imagen img2) {
 int main() {
     Lista dataset_lista;
     crear_lista(&dataset_lista);
+    tipoMaxMonticulo dist_minimas;
+    nuevoMaxMonticulo(&dist_minimas, N);
 
     char* nombre_datos_binario = (char*)malloc(25);
     
