@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+const tipoElementoMaxMonticulo ERROR_VALUE = {.distancia = -1, .tipo_numero = -1};
+
 void intercambiar(tipoElementoMaxMonticulo *a, int i, int j) {
     tipoElementoMaxMonticulo aux;
     aux = a[i];
@@ -91,7 +93,7 @@ tipoElementoMaxMonticulo devolverRaiz(tipoMaxMonticulo m) {
 }
 
 void mostrarAnchura(tipoMaxMonticulo m) {
-    for (int i = 0; i <= m.pos; i++) printf("dist %d - tipo %d \n", m.array[i].distancia, m.array[i].tipo_numero);
+    for (int i = 0; i <= m.pos; i++) printf("dist %lfe - tipo %d \n", m.array[i].distancia, m.array[i].tipo_numero);
 }
 
 bool esVacio(tipoMaxMonticulo m) { return (m.pos == -1); }
