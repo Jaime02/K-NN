@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const tipoElementoMaxMonticulo ERROR_VALUE = {.distancia = -1, .tipo_numero = -1};
+
 
 void intercambiar(tipoElementoMaxMonticulo *a, int i, int j) {
     tipoElementoMaxMonticulo aux;
