@@ -3,6 +3,7 @@
 
 CMakeFiles/K_NN.dir/knn.c.obj: ../knn.c
 CMakeFiles/K_NN.dir/knn.c.obj: ../list.h
+CMakeFiles/K_NN.dir/knn.c.obj: ../maxMonticulo.h
 
 CMakeFiles/K_NN.dir/list.c.obj: ../list.c
 CMakeFiles/K_NN.dir/list.c.obj: ../list.h

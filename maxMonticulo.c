@@ -1,8 +1,7 @@
-#include "maxMonticulo.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "maxMonticulo.h"
 
 
 void intercambiar(tipoElementoMaxMonticulo *a, int i, int j) {

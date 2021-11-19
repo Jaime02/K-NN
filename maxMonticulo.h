@@ -1,12 +1,14 @@
 #include <stdbool.h>
 
+#ifndef MAXMONTICULO_H_
+#define MAXMONTICULO_H_
 
 typedef struct {
     double distancia;
     int tipo_numero;
 } tipoElementoMaxMonticulo;
 
-const tipoElementoMaxMonticulo ERROR_VALUE = {.distancia = -1, .tipo_numero = -1};
+static tipoElementoMaxMonticulo ERROR_VALUE = {.distancia = -1, .tipo_numero = -1};
 
 typedef struct {
     tipoElementoMaxMonticulo *array;
@@ -27,3 +29,5 @@ void mostrarAnchura(tipoMaxMonticulo);
 bool esVacio(tipoMaxMonticulo);
 
 bool estaLleno(tipoMaxMonticulo);
+
+#endif /* MAXMONTICULO_H_ */

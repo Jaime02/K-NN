@@ -17,26 +17,20 @@ unistd.h
 -
 list.h
 C:/Users/ivons/CLionProjects/YgK-NN/list.h
-
-C:/Users/ivons/CLionProjects/YgK-NN/list.c
-list.h
-C:/Users/ivons/CLionProjects/YgK-NN/list.h
-stdio.h
--
-stdlib.h
--
+maxMonticulo.h
+C:/Users/ivons/CLionProjects/YgK-NN/maxMonticulo.h
 
 C:/Users/ivons/CLionProjects/YgK-NN/list.h
 stdlib.h
 -
 
 C:/Users/ivons/CLionProjects/YgK-NN/maxMonticulo.c
-maxMonticulo.h
-C:/Users/ivons/CLionProjects/YgK-NN/maxMonticulo.h
 stdio.h
 -
 stdlib.h
 -
+maxMonticulo.h
+C:/Users/ivons/CLionProjects/YgK-NN/maxMonticulo.h
 
 C:/Users/ivons/CLionProjects/YgK-NN/maxMonticulo.h
 stdbool.h
