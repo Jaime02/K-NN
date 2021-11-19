@@ -8,7 +8,7 @@ typedef struct {
     int tipo_numero;
 } tipoElementoMaxMonticulo;
 
-static tipoElementoMaxMonticulo ERROR_VALUE = {.distancia = -1, .tipo_numero = -1};
+const tipoElementoMaxMonticulo ERROR_VALUE = {.distancia = -1, .tipo_numero = -1};
 
 typedef struct {
     tipoElementoMaxMonticulo *array;

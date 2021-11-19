@@ -3,7 +3,6 @@
 
 #include "maxMonticulo.h"
 
-
 void intercambiar(tipoElementoMaxMonticulo *a, int i, int j) {
     tipoElementoMaxMonticulo aux;
     aux = a[i];

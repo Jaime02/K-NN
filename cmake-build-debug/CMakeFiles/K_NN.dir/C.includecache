@@ -6,24 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/ivons/CLionProjects/YgK-NN/knn.c
-math.h
--
-stdio.h
--
-stdlib.h
--
-unistd.h
--
-list.h
-C:/Users/ivons/CLionProjects/YgK-NN/list.h
-maxMonticulo.h
-C:/Users/ivons/CLionProjects/YgK-NN/maxMonticulo.h
-
-C:/Users/ivons/CLionProjects/YgK-NN/list.h
-stdlib.h
--
-
 C:/Users/ivons/CLionProjects/YgK-NN/maxMonticulo.c
 stdio.h
 -
