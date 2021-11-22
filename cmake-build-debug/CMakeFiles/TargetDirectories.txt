@@ -1,6 +1,0 @@
-C:/Users/ivons/CLionProjects/YgK-NN/cmake-build-debug/CMakeFiles/CONV.dir
-C:/Users/ivons/CLionProjects/YgK-NN/cmake-build-debug/CMakeFiles/K_NN.dir
-C:/Users/ivons/CLionProjects/YgK-NN/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/ivons/CLionProjects/YgK-NN/cmake-build-debug/CMakeFiles/WILL.dir
-C:/Users/ivons/CLionProjects/YgK-NN/cmake-build-debug/CMakeFiles/EXMM.dir
-C:/Users/ivons/CLionProjects/YgK-NN/cmake-build-debug/CMakeFiles/edit_cache.dir

@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include "list.h"
+#include "maxMonticulo.h"
 
 int distancia_euclideana(Imagen img1, Imagen img2) {
     int distancia = 0;
@@ -20,18 +21,18 @@ int main() {
 
     char* nombre_datos_binario = (char*)malloc(25);
     Imagen img;
-    
+
+    FILE* datos_binario;
     printf("Loading dataset... \n");
     for (int numero = 0; numero < 10; numero++) {
-        sprintf(nombre_datos_binario, "binary_data/data%d.bin", numero);
-
-        FILE* datos_binario = fopen(nombre_datos_binario, "rb");
+        sprintf(nombre_datos_binario, "../binary_data/data%d.bin", numero);
+        datos_binario = fopen(nombre_datos_binario, "rb");
 
         for (int j = 0; j < 1000; j++) {
             for (int k = 0; k < 28 * 28; k++) {
                 fread(&(img[k]), sizeof(char), 1, datos_binario);
-                encolar(&dataset_lista, img, numero);
             }
+            encolar(&dataset_lista, img, numero);
         }
         fclose(datos_binario);
     }

@@ -1,5 +1,8 @@
 #include <stdlib.h>
 
+#ifndef LIST_H_
+#define LIST_H_
+
 // Define a list of Images
 typedef char Imagen[28*28];
 
@@ -24,3 +27,5 @@ void desencolar(Lista *l);
 void borrar_lista(Lista *l);
 
 void borrar_elemento(Lista *l, Celda *c);
+
+#endif //LIST_H_

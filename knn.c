@@ -29,7 +29,6 @@ int main() {
     nuevoMaxMonticulo(&dist_minimas, N);
 
     char* nombre_datos_binario = (char*)malloc(25);
-    
     Imagen img;
     
     FILE* datos_binario;
