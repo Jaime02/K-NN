@@ -6,7 +6,7 @@
 #include "list.h"
 #include "maxMonticulo.h"
 
-#define N 5 //La N del KNN
+#define N 20 //La N del KNN
 
 int distancia_euclideana(Imagen img1, Imagen img2) {
     double distancia = 0;
@@ -91,7 +91,7 @@ int main() {
             tipos[aux.tipo_numero][1] += aux.distancia;
             eliminarElemento(&dist_minimas, devolverRaiz(dist_minimas));
         }
-        int max_ap = -1, max_tipo = -1;
+        int max_ap = 0, max_tipo = 0;
         for (int j = 0; j < 10; j++) {
             if(max_ap < tipos[j][0]){
                 max_tipo = j;
