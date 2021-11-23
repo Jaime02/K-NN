@@ -18,12 +18,6 @@ int hijoIzq(int i) { return (i * 2 + 1); }
 
 int hijoDer(int i) { return (i * 2 + 2); }
 
-int max(int x, int y){
-    if(x < y)
-        return(y);
-    else
-        return(x);
-}
 
 void hundir(tipoElementoMaxMonticulo *a, int i) {
     while (a[padre(i)].distancia < a[i].distancia) {
@@ -36,7 +30,11 @@ void flotar(tipoElementoMaxMonticulo *a, int i, int lim) {
     while ((a[hijoDer(i)].distancia > a[i].distancia || a[hijoIzq(i)].distancia > a[i].distancia) &&
            (hijoDer(i) <= lim && hijoIzq(i) <= lim)) {
         if (a[hijoDer(i)].distancia > a[i].distancia && a[hijoIzq(i)].distancia > a[i].distancia) {
-            intercambiar(a, i, max(hijoDer(i), hijoIzq(i)));
+            if(a[hijoDer(i)].distancia > a[hijoIzq(i)].distancia){
+                intercambiar(a, i, hijoDer(i));
+            }else if(a[hijoDer(i)].distancia <= a[hijoIzq(i)].distancia){
+                intercambiar(a, i, hijoIzq(i));
+            }
         } else if (a[hijoDer(i)].distancia > a[i].distancia && !(a[hijoIzq(i)].distancia > a[i].distancia)) {
             intercambiar(a, i, hijoDer(i));
         } else if (!(a[hijoDer(i)].distancia > a[i].distancia) && a[hijoIzq(i)].distancia > a[i].distancia) {
@@ -93,7 +91,7 @@ tipoElementoMaxMonticulo devolverRaiz(tipoMaxMonticulo m) {
 }
 
 void mostrarAnchura(tipoMaxMonticulo m) {
-    for (int i = 0; i <= m.pos; i++) printf("dist %lf - tipo %d \n", m.array[i].distancia, m.array[i].tipo_numero);
+    for (int i = 0; i <= m.pos; i++) printf("dist %d - tipo %d \n", m.array[i].distancia, m.array[i].tipo_numero);
 }
 
 bool esVacio(tipoMaxMonticulo m) { return (m.pos == -1); }
