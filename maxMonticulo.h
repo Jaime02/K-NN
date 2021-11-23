@@ -1,7 +1,6 @@
 #include <stdbool.h>
 
-#ifndef MAXMONTICULO_H_
-#define MAXMONTICULO_H_
+#pragma once
 
 typedef struct {
     int distancia;
@@ -28,5 +27,3 @@ void mostrarAnchura(tipoMaxMonticulo);
 bool esVacio(tipoMaxMonticulo);
 
 bool estaLleno(tipoMaxMonticulo);
-
-#endif  //MAXMONTICULO_H_
