@@ -32,13 +32,17 @@ void flotar(tipoElementoMaxMonticulo *a, int i, int lim) {
         if (a[hijoDer(i)].distancia > a[i].distancia && a[hijoIzq(i)].distancia > a[i].distancia) {
             if(a[hijoDer(i)].distancia > a[hijoIzq(i)].distancia){
                 intercambiar(a, i, hijoDer(i));
+                i = hijoDer(i);
             }else if(a[hijoDer(i)].distancia <= a[hijoIzq(i)].distancia){
                 intercambiar(a, i, hijoIzq(i));
+                i = hijoIzq(i);
             }
         } else if (a[hijoDer(i)].distancia > a[i].distancia && !(a[hijoIzq(i)].distancia > a[i].distancia)) {
             intercambiar(a, i, hijoDer(i));
+            i = hijoDer(i);
         } else if (!(a[hijoDer(i)].distancia > a[i].distancia) && a[hijoIzq(i)].distancia > a[i].distancia) {
             intercambiar(a, i, hijoIzq(i));
+            i = hijoIzq(i);
         }
     }
     if (hijoIzq(i) <= lim && a[hijoIzq(i)].distancia > a[i].distancia) {
