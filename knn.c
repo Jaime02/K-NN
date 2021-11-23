@@ -1,11 +1,10 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include "list.h"
 #include "maxMonticulo.h"
 
-#define N 5 //La N del KNN
+#define N 50 //La N del KNN
 
 double distancia_euclideana(Imagen img1, Imagen img2) {
     // Entre 0 y 7140
@@ -17,8 +16,15 @@ double distancia_euclideana(Imagen img1, Imagen img2) {
 }
 
 void crea_img_vacia(Imagen *img){
-    for (int i = 0; i < 28*28; i++)
-        (*img)[i] = (char) 225;
+    char* nombre_datos_binario = (char*)malloc(25);
+    int numero = 1;
+    sprintf(nombre_datos_binario, "../binary_data/data%d.bin", numero);
+    FILE* datos_binario = fopen(nombre_datos_binario, "rb");
+
+    for (int k = 0; k < 28 * 28; k++) {
+        fread(&((*img)[k]), sizeof(char), 1, datos_binario);
+    }
+    fclose(datos_binario);
 }
 
 int main() {
@@ -51,7 +57,7 @@ int main() {
     crea_img_vacia(&img);
 
     for(int i = 0; i < dataset_lista.tamanio; i++){
-        double dist = distancia_euclideana(img, aux->image);
+        double dist = distancia_euclideana(img, aux->image);//0 - 7140
         if(!estaLleno(dist_minimas))
             insertarMaxMonticulo(&dist_minimas,(tipoElementoMaxMonticulo) {.distancia = dist, .tipo_numero = aux->numero});
         else{

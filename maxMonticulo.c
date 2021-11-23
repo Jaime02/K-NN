@@ -93,7 +93,7 @@ tipoElementoMaxMonticulo devolverRaiz(tipoMaxMonticulo m) {
 }
 
 void mostrarAnchura(tipoMaxMonticulo m) {
-    for (int i = 0; i <= m.pos; i++) printf("dist %lfe - tipo %d \n", m.array[i].distancia, m.array[i].tipo_numero);
+    for (int i = 0; i <= m.pos; i++) printf("dist %lf - tipo %d \n", m.array[i].distancia, m.array[i].tipo_numero);
 }
 
 bool esVacio(tipoMaxMonticulo m) { return (m.pos == -1); }

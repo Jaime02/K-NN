@@ -4,7 +4,7 @@
 #define MAXMONTICULO_H_
 
 typedef struct {
-    double distancia;
+    int distancia;
     int tipo_numero;
 } tipoElementoMaxMonticulo;
 

@@ -3,7 +3,7 @@
 
 void read_image(FILE* file, int numero, int num_imagen) {
     char *name = (char*)malloc(20 * sizeof(char));
-    sprintf(name, "img/%d/bin/%d-%d.bin", numero, numero, num_imagen);
+    sprintf(name, "./img/%d/bin/%d-%d.bin", numero, numero, num_imagen);
 
     FILE* img_bin = fopen(name, "wb+");
 
@@ -17,11 +17,11 @@ void read_image(FILE* file, int numero, int num_imagen) {
 }
 
 int main() {
-    for (int num = 0; num < 10; num++) {
+    for (int num = 9; num < 10; num++) {
         printf("%d%%\n", num*10);
         char* name = malloc(sizeof(char)*15);
         
-        sprintf(name, "binary_data/data%d.bin", num);
+        sprintf(name, "./binary_data/data%d.bin", num);
 
         FILE* file  = fopen(name, "rb");
 
