@@ -4,7 +4,7 @@
 #define LIST_H_
 
 // Define a list of Images
-typedef char Imagen[28*28];
+typedef unsigned char Imagen[28*28];
 
 typedef struct celda {
     Imagen image;
