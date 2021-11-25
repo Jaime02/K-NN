@@ -8,7 +8,7 @@ int main() {
     tipoMaxMonticulo mon;
     // printf("Introduce el numero maximo de elementos: ");
     // scanf("%d", &numEl);
-    numEl = 10;
+    numEl = 6;
     nuevoMaxMonticulo(&mon, numEl);
     do {
         printf("\n--------MENU-------- \n");
@@ -22,16 +22,23 @@ int main() {
         switch (opcion) {
             case 1:
                 printf("Introduce distancia y tipo: ");
-                scanf("%lf %d", &elem.distancia, &elem.tipo_numero);
-                insertarMaxMonticulo(&mon, elem);
+                scanf("%d %d", &elem.distancia, &elem.tipoNumero);
+                if(!estaLleno(mon))
+                    insertarMaxMonticulo(&mon, elem);
+                else{
+                    if(elem.distancia < devolverRaiz(mon).distancia){
+                        eliminarElemento(&mon, devolverRaiz(mon));
+                        insertarMaxMonticulo(&mon, elem);
+                    }
+                }
                 break;
             case 2:
                 printf("Introduce el entero: ");
-                scanf("%d", &elem);
+                scanf("%d %d", &elem.distancia, &elem.tipoNumero);
                 eliminarElemento(&mon, elem);
                 break;
             case 3:
-                printf("El elemento de la raiz es %d\n", devolverRaiz(mon));
+                printf("El elemento de la raiz esdistancia  %d y tipo %d\n", devolverRaiz(mon).distancia, devolverRaiz(mon).tipoNumero);
                 break;
             case 4:
                 printf("Los elementos del monticulo son:\n");

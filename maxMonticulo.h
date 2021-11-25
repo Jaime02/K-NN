@@ -4,7 +4,7 @@
 
 typedef struct {
     int distancia;
-    int tipo_numero;
+    int tipoNumero;
 } tipoElementoMaxMonticulo;
 
 

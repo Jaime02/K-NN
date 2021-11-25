@@ -6,7 +6,7 @@
 #include "list.h"
 #include "maxMonticulo.h"
 
-#define N 5 //La N del KNN
+#define N 20  // La N del KNN
 
 int distancia_euclideana(Imagen img1, Imagen img2) {
     double distancia = 0;
@@ -16,27 +16,25 @@ int distancia_euclideana(Imagen img1, Imagen img2) {
     }
     return (int)sqrt(distancia);
 }
-void reset_tabla_tipos(int t[10][2]){
+void resetTablaTipos(int t[10][2]) {
     for (int i = 0; i < 10; ++i) {
-        for (int j = 0; j < 2; ++j)
-            t[i][j] = 0;
+        for (int j = 0; j < 2; ++j) t[i][j] = 0;
     }
 }
 
-void ini_matriz(int m[10][10]){
+void ini_matriz(int m[10][10]) {
     for (int i = 0; i < 10; ++i) {
-        for (int j = 0; j < 10; ++j)
-            m[i][j] = 0;
+        for (int j = 0; j < 10; ++j) m[i][j] = 0;
     }
 }
 
 int main() {
-    int tipos_teoricos[10000], tipos[10][2], matriz_dispersion[10][10];
-    reset_tabla_tipos(tipos);
-    Lista dataset_lista;
-    crear_lista(&dataset_lista);
-    tipoMaxMonticulo dist_minimas;
-    nuevoMaxMonticulo(&dist_minimas, N);
+    int tiposTeoricos[10000], tipos[10][2], matriz_dispersion[10][10];
+    resetTablaTipos(tipos);
+    Lista listaDataset;
+    crear_lista(&listaDataset);
+    tipoMaxMonticulo distMinimas;
+    nuevoMaxMonticulo(&distMinimas, N);
     ini_matriz(matriz_dispersion);
 
     char* nombre_datos_binario = (char*)malloc(25);
@@ -52,65 +50,60 @@ int main() {
             for (int k = 0; k < 28 * 28; k++) {
                 fread(&(img[k]), sizeof(char), 1, datos_binario);
             }
-            encolar(&dataset_lista, img, numero);
+            encolar(&listaDataset, img, numero);
         }
         fclose(datos_binario);
     }
     printf("Loaded dataset \n");
-    fflush(stdout);
 
     double distancia = 0;
 
-    Celda* celda_actual = dataset_lista.ini;
-    Celda* celda_comparar = dataset_lista.ini;
+    Celda* celda_actual = listaDataset.ini;
+    Celda* celda_comparar = listaDataset.ini;
 
-    for (int i = 1; i < dataset_lista.tamanio; i++){
-        printf("%d ", i);
-        for (int j = 1; j < dataset_lista.tamanio; j++) {
-            if(i != j) {
-                int dist = distancia_euclideana(celda_actual->image, celda_comparar->image);//0 - 7140
-                if (!estaLleno(dist_minimas))
-                    insertarMaxMonticulo(&dist_minimas,
-                                         (tipoElementoMaxMonticulo) {.distancia = dist, .tipo_numero = celda_comparar->numero});
+    for (int i = 0; i < listaDataset.tamanio; i++) {
+        for (int j = 0; j < listaDataset.tamanio; j++) {
+            if (i != j) {
+                int dist = distancia_euclideana(celda_actual->image, celda_comparar->image);  // 0 - 7140
+                if (!estaLleno(distMinimas))
+                    insertarMaxMonticulo(&distMinimas, (tipoElementoMaxMonticulo){.distancia = dist, .tipoNumero = celda_comparar->numero});
                 else {
-                    if (dist < devolverRaiz(dist_minimas).distancia) {
-                        eliminarElemento(&dist_minimas, devolverRaiz(dist_minimas));
-                        insertarMaxMonticulo(&dist_minimas,
-                                             (tipoElementoMaxMonticulo) {.distancia = dist, .tipo_numero = celda_comparar->numero});
+                    if (dist < devolverRaiz(distMinimas).distancia) {
+                        eliminarElemento(&distMinimas, devolverRaiz(distMinimas));
+                        insertarMaxMonticulo(&distMinimas, (tipoElementoMaxMonticulo){.distancia = dist, .tipoNumero = celda_comparar->numero});
                     }
                 }
-            }else{celda_comparar = celda_comparar->sig;continue;}
+            }
             celda_comparar = celda_comparar->sig;
-
         }
         celda_actual = celda_actual->sig;
-        celda_comparar = dataset_lista.ini;
+        celda_comparar = listaDataset.ini;
         for (int j = 0; j < N; j++) {
-            tipoElementoMaxMonticulo aux = devolverRaiz(dist_minimas);
-            tipos[aux.tipo_numero][0] ++;
-            tipos[aux.tipo_numero][1] += aux.distancia;
-            eliminarElemento(&dist_minimas, devolverRaiz(dist_minimas));
+            tipoElementoMaxMonticulo aux = devolverRaiz(distMinimas);
+            tipos[aux.tipoNumero][0]++;
+            tipos[aux.tipoNumero][1] += aux.distancia;
+            eliminarElemento(&distMinimas, devolverRaiz(distMinimas));
         }
-        int max_ap = -1, max_tipo = -1;
+        int max_ap = 0, max_tipo = 0;
         for (int j = 0; j < 10; j++) {
-            if(max_ap < tipos[j][0]){
+            if (max_ap < tipos[j][0]) {
                 max_tipo = j;
                 max_ap = tipos[j][0];
-            }else if(max_ap == tipos[j][0]){
-                if(tipos[max_tipo][1] > tipos[j][1]){
+            } else if (max_ap == tipos[j][0]) {
+                if (tipos[max_tipo][1] > tipos[j][1]) {
                     max_ap = tipos[j][0];
                     max_tipo = j;
                 }
             }
         }
         matriz_dispersion[celda_actual->numero][max_tipo]++;
-        tipos_teoricos[i] = max_tipo;
-        reset_tabla_tipos(tipos);
+        tiposTeoricos[i] = max_tipo;
+        resetTablaTipos(tipos);
     }
 
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {
-            printf(" %d",matriz_dispersion[i][j]);
+            printf(" %d", matriz_dispersion[i][j]);
         }
         printf("\n");
     }

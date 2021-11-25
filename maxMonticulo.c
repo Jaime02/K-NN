@@ -1,68 +1,103 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "maxMonticulo.h"
 
-void nuevoMaxMonticulo(tipoMaxMonticulo *p, int n) {
-    p->numEl = 0;
-    p->array = (tipoElementoMaxMonticulo *) malloc(n * sizeof(tipoElementoMaxMonticulo));
-    p->pos = -1;
+const tipoElementoMaxMonticulo ERROR_VALUE = {.distancia = -1, .tipoNumero = -1};
+
+void intercambiar(tipoElementoMaxMonticulo *a, int i, int j) {
+    tipoElementoMaxMonticulo aux;
+    aux = a[i];
+    a[i] = a[j];
+    a[j] = aux;
 }
 
-void insertarMaxMonticulo(tipoMaxMonticulo *p, tipoElementoMaxMonticulo e) {
-    int i;
-    if (!estaLleno(*p)) {
-        p->pos++;
-        i = p->pos;
-        while (i > 0 && (p->array)[(i - 1) / 2].distancia < e.distancia) {
-            (p->array)[i] = (p->array)[(i - 1) / 2];
-            i = (i - 1) / 2;
-        }
-        p->array[i] = e;
+int padre(int i) { return ((i - 1) / 2); }
+
+int hijoIzq(int i) { return (i * 2 + 1); }
+
+int hijoDer(int i) { return (i * 2 + 2); }
+
+
+void hundir(tipoElementoMaxMonticulo *a, int i) {
+    while (a[padre(i)].distancia < a[i].distancia) {
+        intercambiar(a, i, padre(i));
+        i = padre(i);
     }
 }
 
-void eliminarElemento(tipoMaxMonticulo *p, tipoElementoMaxMonticulo e) {
-    // Deletes a element from the heap
+void flotar(tipoElementoMaxMonticulo *a, int i, int lim) {
+    while ((a[hijoDer(i)].distancia > a[i].distancia || a[hijoIzq(i)].distancia > a[i].distancia) &&
+           (hijoDer(i) <= lim && hijoIzq(i) <= lim)) {
+        if (a[hijoDer(i)].distancia > a[i].distancia && a[hijoIzq(i)].distancia > a[i].distancia) {
+            if(a[hijoDer(i)].distancia > a[hijoIzq(i)].distancia){
+                intercambiar(a, i, hijoDer(i));
+                i = hijoDer(i);
+            }else if(a[hijoDer(i)].distancia <= a[hijoIzq(i)].distancia){
+                intercambiar(a, i, hijoIzq(i));
+                i = hijoIzq(i);
+            }
+        } else if (a[hijoDer(i)].distancia > a[i].distancia && !(a[hijoIzq(i)].distancia > a[i].distancia)) {
+            intercambiar(a, i, hijoDer(i));
+            i = hijoDer(i);
+        } else if (!(a[hijoDer(i)].distancia > a[i].distancia) && a[hijoIzq(i)].distancia > a[i].distancia) {
+            intercambiar(a, i, hijoIzq(i));
+            i = hijoIzq(i);
+        }
+    }
+    if (hijoIzq(i) <= lim && a[hijoIzq(i)].distancia > a[i].distancia) {
+        intercambiar(a, i, hijoIzq(i));
+    }
+}
 
-    // Find the element
+void nuevoMaxMonticulo(tipoMaxMonticulo *m, int tam) {
+    m->pos = -1;
+    m->array = (tipoElementoMaxMonticulo *)malloc(
+        tam * sizeof(tipoElementoMaxMonticulo));
+    m->numEl = tam;
+}
+
+void insertarMaxMonticulo(tipoMaxMonticulo *m, tipoElementoMaxMonticulo elem) {
+    if (!estaLleno(*m)) {
+        if (esVacio(*m)) {
+            m->pos++;
+            m->array[m->pos] = elem;
+        } else {
+            m->pos++;
+            int i = m->pos;
+            m->array[i] = elem;
+            hundir(m->array, i);
+        }
+    } else
+        printf("Error: Monticulo lleno\n");
+}
+
+void eliminarElemento(tipoMaxMonticulo *m, tipoElementoMaxMonticulo elem) {
     int i = 0;
-    while (i < p->numEl && (p->array)[i] != e) {
+    while (m->array[i].distancia != elem.distancia && i <= m->pos) {
         i++;
     }
-
-    // If the element is not in the heap, return
-    if (i == p->numEl) {
-        return;
-    }
-
-    // Swap the element with the last element
-    (p->array)[i] = (p->array)[p->numEl - 1];
-    p->numEl--;
-
-    // Restore the heap property
-    int j = i;
-    while (j > 0 && (p->array)[j] > (p->array)[(j - 1) / 2]) {
-        swap(&((p->array)[j]), &(p->array[(j - 1) / 2]));
-        j = (j - 1) / 2;
-    }
-};
-
-void swap(tipoElementoMaxMonticulo *a, tipoElementoMaxMonticulo *b) {
-    tipoElementoMaxMonticulo temp = *a;
-    *a = *b;
-    *b = temp;
+    if (i <= m->pos) {
+        m->array[i] = m->array[m->pos];
+        m->pos--;
+        flotar(m->array, i, m->pos);
+    } else
+        printf("El elemento no esta en el monticulo\n");
 }
 
-tipoElementoMaxMonticulo devolverRaiz(tipoMaxMonticulo p) {
-    return p.array[0];
+tipoElementoMaxMonticulo devolverRaiz(tipoMaxMonticulo m) {
+    if (!esVacio(m))
+        return (m.array[0]);
+    else {
+        printf("MaxMonticulo vacio\n");
+        return ERROR_VALUE;
+    }
 }
 
 void mostrarAnchura(tipoMaxMonticulo m) {
-    for (int i = 0; i <= m.pos; i++) printf("dist %d - tipo %d \n", m.array[i].distancia, m.array[i].tipo_numero);
+    for (int i = 0; i <= m.pos; i++) printf("dist %d - tipo %d \n", m.array[i].distancia, m.array[i].tipoNumero);
 }
 
-bool esVacio(tipoMaxMonticulo m) {
-    return m.numEl == 0;
-}
+bool esVacio(tipoMaxMonticulo m) { return (m.pos == -1); }
 
-bool estaLleno(tipoMaxMonticulo m) {
-    return m.numEl == m.pos + 1;
-};
+bool estaLleno(tipoMaxMonticulo m) { return (m.pos == m.numEl - 1); }
